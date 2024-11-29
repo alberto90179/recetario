@@ -6,7 +6,7 @@ include 'db.php';
 if (!isset($_SESSION['usuario_id'])) {
     header("Location: login.php");
     exit;
-}
+}   
 
 // Obtiene el nombre del usuario de la base de datos
 $usuario_id = $_SESSION['usuario_id'];

@@ -46,10 +46,12 @@ if (isset($_GET['id'])) {
                 
                 <?php if (!empty($receta['video'])): ?>
                     <h3>Video de Preparación</h3>
-                    <video controls>
-                        <source src="assets/videos/<?php echo $receta['video']; ?>" type="video/mp4">
-                        Tu navegador no soporta el elemento de video.
-                    </video>
+                    <p>
+                        Mira el video en el siguiente enlace: 
+                        <a href="<?php echo htmlspecialchars($receta['video']); ?>" target="_blank">
+                            Ver Video
+                        </a>
+                    </p>
                 <?php endif; ?>
             </div>
             <a href="recetas.php" class="btn-primary">Volver a Recetas</a>
