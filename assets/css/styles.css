@@ -1,0 +1,173 @@
+    /* Global */
+    body {
+        font-family: 'Poppins', sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #fff8ec;
+        color: #333;
+    }
+
+    header {
+        background-color: #ffad60; 
+        color: white;
+        padding: 10px; 
+        text-align: center;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        display: flex; 
+        flex-direction: column; /* Apila los elementos verticalmente */
+        align-items: center; 
+    }
+    
+    header .usuario-info {
+        font-size: 14px;
+        font-weight: bold;
+        color: #333;
+        text-align: right;
+        align-self: flex-end; /* Alinea el elemento a la derecha */
+        margin-bottom: 10px; /* Agrega un margen inferior */
+    }
+    
+    header h1 { 
+        margin: 0;
+        font-size: 2.5rem;
+        font-weight: bold;
+        display: flex; /* Permite alinear el título y las imágenes */
+        align-items: center;
+        margin-bottom: 10px; /* Agrega un margen inferior */
+    }
+    
+    /* Puedes agregar estilos para las imágenes dentro del h1 aquí */
+    header h1 img { 
+        margin: 0 10px; /* Ajusta el espacio entre el título y las imágenes */
+    }
+    
+    .nav {
+        display: flex;
+        justify-content: center; 
+        gap: 20px;
+        list-style: none;
+        margin: 0; 
+        padding: 0;
+    }
+    .nav li a {
+        text-decoration: none;
+        font-size: 1.1rem;
+        color: white;
+        padding: 10px 15px;
+        border-radius: 5px;
+        background-color: #ff7043;
+        transition: background-color 0.3s;
+    }
+
+    .nav li a:hover {
+        background-color: #e64a19;
+    }
+
+    /* Botones */
+    .btn-primary {
+        background-color: #ff7043;
+        color: white;
+        text-decoration: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        font-size: 1rem;
+        display: inline-block;
+        text-align: center;
+        transition: background-color 0.3s;
+    }
+
+    .btn-primary:hover {
+        background-color: #e64a19;
+    }
+
+    .btn-login, .btn-register, .btn-logout {
+        background-color: #f44336;
+        padding: 10px 15px;
+        border-radius: 5px;
+        color: white;
+        text-decoration: none;
+    }
+
+    .btn-login:hover, .btn-register:hover, .btn-logout:hover {
+        background-color: #c62828;
+    }
+
+    /* Secciones */
+    main {
+        padding: 20px;
+        text-align: center;
+    }
+
+    .intro {
+        background-color: #ffe5d4;
+        padding: 20px;
+        border-radius: 8px;
+        margin-bottom: 30px;
+    }
+
+    .featured {
+        margin-bottom: 30px;
+    }
+
+    .featured h2 {
+        font-size: 1.8rem;
+        margin-bottom: 20px;
+    }
+
+    .recetas {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 20px;
+    }
+
+    .receta-card {
+        background-color: white;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        padding: 15px;
+        text-align: center;
+        width: 300px;
+    }
+
+    .receta-card img {
+        max-width: 100%;
+        height: 200px;
+        object-fit: cover;
+        border-radius: 10px;
+    }
+
+    .receta-card h3 {
+        margin: 10px 0;
+        font-size: 1.3rem;
+    }
+
+    footer {
+        background-color: #ffad60;
+        color: white;
+        padding: 10px 0;
+        text-align: center;
+    }
+    .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px;
+        background-color: #ffad60;
+    }
+
+    .nav {
+        list-style: none;
+        display: flex;
+        gap: 15px;
+    }
+
+    .nav li {
+        display: inline;
+    }
+
+    .usuario-info {
+        font-size: 14px;
+        font-weight: bold;
+        color: #333;
+    }
