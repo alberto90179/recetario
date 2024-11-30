@@ -47,16 +47,16 @@ $recetas = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <section class="recipes-list">
             <h2>Gestión de Recetas</h2>
             <div class="recetas">
-                <?php if (count($recetas) > 0): ?>
+                <?php if ($recetas): ?>
                     <?php foreach ($recetas as $receta): ?>
                         <article class="receta-card">
                             <img src="assets/uploads/<?php echo htmlspecialchars($receta['imagen']); ?>" alt="<?php echo htmlspecialchars($receta['titulo']); ?>">
                             <h3><?php echo htmlspecialchars($receta['titulo']); ?></h3>
                             <a href="receta.php?id=<?php echo htmlspecialchars($receta['id']); ?>" class="btn-primary">Ver</a>
                             <a href="edit_receta.php?id=<?php echo htmlspecialchars($receta['id']); ?>" class="btn-secondary">Editar</a>
-                            <form action="delete_receta.php" method="POST" class="form-inline">
+                            <form action="delete_receta.php" method="POST" class="form-inline" onsubmit="return confirm('¿Estás seguro de que deseas eliminar esta receta?');">
                                 <input type="hidden" name="id" value="<?php echo htmlspecialchars($receta['id']); ?>">
-                                <button type="submit" class="btn-danger" onclick="return confirm('¿Estás seguro de que deseas eliminar esta receta?');">Eliminar</button>
+                                <button type="submit" class="btn-danger">Eliminar</button>
                             </form>
                         </article>
                     <?php endforeach; ?>
@@ -69,6 +69,11 @@ $recetas = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     <footer class="footer">
         <p>&copy; 2024 Recetario Culinario. 🍽️ Todos los derechos reservados.</p>
+        <div class="social-links">
+            <a href="https://www.youtube.com/user/canalcocina" target="_blank">YouTube</a>
+            <a href="https://vimeo.com/channels/661677" target="_blank">Vimeo</a>
+            <a href="https://open.spotify.com/show/2SiHtlkhVKeG85wYMZtfK1" target="_blank">Spotify</a>
+        </div>
     </footer>
 </body>
 </html>
