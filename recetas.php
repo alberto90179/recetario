@@ -50,14 +50,16 @@ $recetas = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 <?php if ($recetas): ?>
                     <?php foreach ($recetas as $receta): ?>
                         <article class="receta-card">
-                            <img src="assets/uploads/<?php echo htmlspecialchars($receta['imagen']); ?>" alt="<?php echo htmlspecialchars($receta['titulo']); ?>">
+                            <img src="assets/uploads/<?php echo htmlspecialchars($receta['imagen']); ?>" alt="<?php echo htmlspecialchars($receta['titulo']); ?>" class="receta-img">
                             <h3><?php echo htmlspecialchars($receta['titulo']); ?></h3>
-                            <a href="receta.php?id=<?php echo htmlspecialchars($receta['id']); ?>" class="btn-primary">Ver</a>
-                            <a href="edit_receta.php?id=<?php echo htmlspecialchars($receta['id']); ?>" class="btn-secondary">Editar</a>
-                            <form action="delete_receta.php" method="POST" class="form-inline" onsubmit="return confirm('¿Estás seguro de que deseas eliminar esta receta?');">
-                                <input type="hidden" name="id" value="<?php echo htmlspecialchars($receta['id']); ?>">
-                                <button type="submit" class="btn-danger">Eliminar</button>
-                            </form>
+                            <div class="receta-actions">
+                                <a href="receta.php?id=<?php echo htmlspecialchars($receta['id']); ?>" class="btn-primary">Ver</a>
+                                <a href="edit_receta.php?id=<?php echo htmlspecialchars($receta['id']); ?>" class="btn-secondary">Editar</a>
+                                <form action="delete_receta.php" method="POST" class="form-inline" onsubmit="return confirm('¿Estás seguro de que deseas eliminar esta receta?');">
+                                    <input type="hidden" name="id" value="<?php echo htmlspecialchars($receta['id']); ?>">
+                                    <button type="submit" class="btn-danger">Eliminar</button>
+                                </form>
+                            </div>
                         </article>
                     <?php endforeach; ?>
                 <?php else: ?>
