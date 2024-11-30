@@ -60,6 +60,11 @@ $recetasDestacadas = $stmt->fetchAll();
     </main>
     <footer class="footer">
         <p>&copy; 2024 Recetario Culinario. 🍽️ Todos los derechos reservados.</p>
+        <div class="social-links">
+            <a href="https://www.youtube.com/" target="_blank">YouTube</a>
+            <a href="https://vimeo.com/" target="_blank">Vimeo</a>
+            <a href="https://open.spotify.com/" target="_blank">Spotify</a>
+        </div>
     </footer>
 </body>
 </html>
