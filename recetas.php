@@ -1,4 +1,4 @@
-<?php
+<?php 
 session_start();
 include 'db.php';
 
@@ -8,16 +8,18 @@ if (!isset($_SESSION['usuario_id'])) {
     exit;
 }
 
-// Obtiene el nombre del usuario de la base de datos
 $usuario_id = $_SESSION['usuario_id'];
+
+// Obtiene el nombre del usuario
 $stmt = $pdo->prepare("SELECT nombre FROM usuarios WHERE id = ?");
 $stmt->execute([$usuario_id]);
 $usuario = $stmt->fetch();
-$nombre_usuario = $usuario ? htmlspecialchars($usuario['nombre']) : ''; // Escapa el nombre para evitar XSS
+$nombre_usuario = $usuario ? htmlspecialchars($usuario['nombre']) : '';
 
-// Consulta todas las recetas
-$stmt = $pdo->query("SELECT * FROM recetas ORDER BY id DESC");
-$recetas = $stmt->fetchAll(PDO::FETCH_ASSOC); // Asegúrate de obtener un array asociativo
+// Consulta todas las recetas del usuario
+$stmt = $pdo->prepare("SELECT * FROM recetas WHERE usuario_id = ? ORDER BY id DESC");
+$stmt->execute([$usuario_id]);
+$recetas = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
 <!DOCTYPE html>
@@ -25,12 +27,12 @@ $recetas = $stmt->fetchAll(PDO::FETCH_ASSOC); // Asegúrate de obtener un array 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Recetas</title>
-    <link rel="stylesheet" href="assets/css/styles.css"> 
+    <title>Mis Recetas</title>
+    <link rel="stylesheet" href="assets/css/styles.css">
 </head>
 <body>
     <header class="header">
-        <h1>🍴 Recetas Disponibles</h1>
+        <h1>🍴 Mis Recetas</h1>
         <nav>
             <ul class="nav">
                 <li><a href="index.php">Inicio</a></li>
@@ -38,28 +40,33 @@ $recetas = $stmt->fetchAll(PDO::FETCH_ASSOC); // Asegúrate de obtener un array 
                 <li><a href="logout.php" class="btn-logout">Cerrar Sesión</a></li>
             </ul>
         </nav>
-        <?php if ($nombre_usuario): ?>
-            <p>Bienvenido, <?php echo $nombre_usuario; ?>!</p>
-        <?php endif; ?>
+        <p class="welcome">Bienvenido, <?php echo $nombre_usuario; ?>!</p>
     </header>
+
     <main>
         <section class="recipes-list">
-            <h2>Explora nuestras recetas</h2>
+            <h2>Gestión de Recetas</h2>
             <div class="recetas">
                 <?php if (count($recetas) > 0): ?>
                     <?php foreach ($recetas as $receta): ?>
                         <article class="receta-card">
                             <img src="assets/uploads/<?php echo htmlspecialchars($receta['imagen']); ?>" alt="<?php echo htmlspecialchars($receta['titulo']); ?>">
                             <h3><?php echo htmlspecialchars($receta['titulo']); ?></h3>
-                            <a href="receta.php?id=<?php echo htmlspecialchars($receta['id']); ?>" class="btn-primary">Ver receta</a>
+                            <a href="receta.php?id=<?php echo htmlspecialchars($receta['id']); ?>" class="btn-primary">Ver</a>
+                            <a href="edit_receta.php?id=<?php echo htmlspecialchars($receta['id']); ?>" class="btn-secondary">Editar</a>
+                            <form action="delete_receta.php" method="POST" class="form-inline">
+                                <input type="hidden" name="id" value="<?php echo htmlspecialchars($receta['id']); ?>">
+                                <button type="submit" class="btn-danger" onclick="return confirm('¿Estás seguro de que deseas eliminar esta receta?');">Eliminar</button>
+                            </form>
                         </article>
                     <?php endforeach; ?>
                 <?php else: ?>
-                    <p>No hay recetas disponibles.</p>
+                    <p>No tienes recetas guardadas.</p>
                 <?php endif; ?>
             </div>
         </section>
     </main>
+
     <footer class="footer">
         <p>&copy; 2024 Recetario Culinario. 🍽️ Todos los derechos reservados.</p>
     </footer>
