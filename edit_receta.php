@@ -28,11 +28,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $titulo = $_POST['titulo'];
     $ingredientes = $_POST['ingredientes'];
     $preparacion = $_POST['preparacion'];
-    $video = $_POST['video']; // Capturar el enlace del video
 
     // Actualizar receta en la base de datos
-    $stmt = $pdo->prepare("UPDATE recetas SET titulo = ?, ingredientes = ?, preparacion = ?, video = ? WHERE id = ? AND usuario_id = ?");
-    $stmt->execute([$titulo, $ingredientes, $preparacion, $video, $id, $usuario_id]);
+    $stmt = $pdo->prepare("UPDATE recetas SET titulo = ?, ingredientes = ?, preparacion = ? WHERE id = ? AND usuario_id = ?");
+    $stmt->execute([$titulo, $ingredientes, $preparacion, $id, $usuario_id]);
 
     header("Location: recetas.php");
     exit;
@@ -64,10 +63,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <div>
                 <label for="preparacion">Modo de preparación:</label>
                 <textarea id="preparacion" name="preparacion" required><?php echo htmlspecialchars($receta['preparacion']); ?></textarea>
-            </div>
-            <div>
-                <label for="video">Enlace al video (opcional):</label>
-                <input type="url" id="video" name="video" value="<?php echo htmlspecialchars($receta['video']); ?>" placeholder="https://www.youtube.com/watch?v=..." pattern="https?://.+">
             </div>
             <button type="submit">Guardar Cambios</button>
             <a href="recetas.php">Cancelar</a>
