@@ -1,6 +1,6 @@
 <?php
-include 'db.php';
 session_start();
+include 'db.php';
 
 // Verifica si el usuario está logueado, si no lo está redirige a login.php
 if (!isset($_SESSION['usuario_id'])) {
@@ -8,22 +8,33 @@ if (!isset($_SESSION['usuario_id'])) {
     exit;
 }
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    // Obtiene los datos del formulario
-    $titulo = $_POST['titulo'];
-    $ingredientes = $_POST['ingredientes'];
-    $preparacion = $_POST['preparacion'];
-    $video_link = $_POST['video_link'];
-    $imagen = $_FILES['imagen']['name'];
+// Procesa el formulario cuando se envía
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Obtiene los datos del formulario y sanitiza la entrada
+    $titulo = trim($_POST['titulo']);
+    $ingredientes = trim($_POST['ingredientes']);
+    $preparacion = trim($_POST['preparacion']);
+    $video_link = trim($_POST['video_link']);
     $usuario_id = $_SESSION['usuario_id'];
 
-    // Mueve la imagen cargada al directorio 'uploads'
-    move_uploaded_file($_FILES['imagen']['tmp_name'], "assets/uploads/$imagen");
+    // Manejo de la imagen
+    if (isset($_FILES['imagen']) && $_FILES['imagen']['error'] === UPLOAD_ERR_OK) {
+        $imagen = basename($_FILES['imagen']['name']);
+        $target_path = "assets/uploads/$imagen";
+
+        // Mueve la imagen cargada al directorio 'uploads'
+        if (!move_uploaded_file($_FILES['imagen']['tmp_name'], $target_path)) {
+            die("Error al cargar la imagen.");
+        }
+    } else {
+        die("Error en la carga de la imagen.");
+    }
 
     // Inserta la receta en la base de datos
     $stmt = $pdo->prepare("INSERT INTO recetas (titulo, imagen, ingredientes, preparacion, video_link, usuario_id) 
                            VALUES (?, ?, ?, ?, ?, ?)");
     $stmt->execute([$titulo, $imagen, $ingredientes, $preparacion, $video_link, $usuario_id]);
+
     // Redirige a la página de recetas
     header("Location: recetas.php");
     exit;
@@ -53,7 +64,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <main>
         <section class="add-recipe">
             <h2>Completa el formulario</h2>
-            <!-- El formulario envía los datos a esta misma página para procesarlos -->
             <form method="POST" enctype="multipart/form-data" class="form-add-recipe">
                 <div class="form-group">
                     <label for="titulo">Título de la receta</label>
@@ -77,7 +87,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
                 <div class="form-group">
                     <label for="video_link">Enlace al video de preparación (opcional)</label>
-                    <input type="text" name="video_link" id="video_link" placeholder="Enlace al video de preparación">
+                    <input type="url" name="video_link" id="video_link" placeholder="Enlace al video de preparación">
                 </div>
 
                 <button type="submit" class="btn-primary">Agregar Receta</button>
