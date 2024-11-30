@@ -46,12 +46,34 @@ if (isset($_GET['id'])) {
                 
                 <?php if (!empty($receta['video'])): ?>
                     <h3>Video de Preparación</h3>
-                    <p>
-                        Mira el video en el siguiente enlace: 
-                        <a href="<?php echo htmlspecialchars($receta['video']); ?>" target="_blank">
-                            Ver Video
-                        </a>
-                    </p>
+                    <?php
+                    // Detecta si es un enlace de YouTube para insertar un iframe
+                    if (strpos($receta['video'], 'youtube.com') !== false || strpos($receta['video'], 'youtu.be') !== false): 
+                        // Convierte el enlace en un enlace embebido
+                        $url_parts = parse_url($receta['video']);
+                        $video_id = '';
+                        if (strpos($url_parts['host'], 'youtube.com') !== false && isset($url_parts['query'])) {
+                            parse_str($url_parts['query'], $query_params);
+                            $video_id = $query_params['v'] ?? '';
+                        } elseif (strpos($url_parts['host'], 'youtu.be') !== false) {
+                            $video_id = trim($url_parts['path'], '/');
+                        }
+                    ?>
+                        <iframe width="560" height="315" 
+                                src="https://www.youtube.com/embed/<?php echo htmlspecialchars($video_id); ?>" 
+                                title="Video de preparación"
+                                frameborder="0" 
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                allowfullscreen>
+                        </iframe>
+                    <?php else: ?>
+                        <p>
+                            Mira el video en el siguiente enlace: 
+                            <a href="<?php echo htmlspecialchars($receta['video']); ?>" target="_blank">
+                                Ver Video
+                            </a>
+                        </p>
+                    <?php endif; ?>
                 <?php endif; ?>
             </div>
             <a href="recetas.php" class="btn-primary">Volver a Recetas</a>
