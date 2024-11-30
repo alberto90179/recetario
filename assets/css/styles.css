@@ -1,4 +1,4 @@
-/* Global */
+/* Global Styles */
 body {
     font-family: 'Poppins', sans-serif;
     margin: 0;
@@ -7,47 +7,50 @@ body {
     color: #333;
 }
 
+/* Header Styles */
 header {
-    background-color: #ffad60; 
+    background-color: #ffad60;
     color: white;
-    padding: 10px; 
+    padding: 10px;
     text-align: center;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-    display: flex; 
-    flex-direction: column; /* Apila los elementos verticalmente */
-    align-items: center; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 header .usuario-info {
     font-size: 14px;
     font-weight: bold;
-    color: #333;
+    color: #333; /* Mejor contraste */
     text-align: right;
-    align-self: flex-end; /* Alinea el elemento a la derecha */
-    margin-bottom: 10px; /* Agrega un margen inferior */
+    align-self: flex-end;
+    margin-bottom: 10px;
 }
 
-header h1 { 
+header h1 {
     margin: 0;
     font-size: 2.5rem;
     font-weight: bold;
-    display: flex; /* Permite alinear el título y las imágenes */
+    display: flex;
     align-items: center;
-    margin-bottom: 10px; /* Agrega un margen inferior */
+    margin-bottom: 10px;
 }
 
-header h1 img { 
-    margin: 0 10px; /* Ajusta el espacio entre el título y las imágenes */
+header h1 img {
+    margin: 0 10px; /* Espaciado entre texto e imágenes */
 }
 
+/* Navigation Styles */
 .nav {
     display: flex;
-    justify-content: center; 
+    justify-content: center;
     gap: 20px;
     list-style: none;
-    margin: 0; 
+    margin: 0;
     padding: 0;
 }
+
 .nav li a {
     text-decoration: none;
     font-size: 1.1rem;
@@ -62,8 +65,10 @@ header h1 img {
     background-color: #e64a19;
 }
 
-/* Botones generales */
-.btn-primary, .btn-secondary, .btn-danger {
+/* Button Styles */
+.btn-primary,
+.btn-secondary,
+.btn-danger {
     display: inline-block;
     padding: 10px 20px;
     font-size: 1rem;
@@ -72,49 +77,44 @@ header h1 img {
     text-decoration: none;
     color: white;
     border-radius: 5px;
-    background-color: #ff7043; /* Color base para los botones */
     transition: background-color 0.3s ease;
     cursor: pointer;
 }
 
-/* Hover para todos los botones */
-.btn-primary:hover, .btn-secondary:hover, .btn-danger:hover {
-    background-color: #e64a19; /* Color al pasar el mouse */
-}
-
-/* Botón "Ver receta" (Primario) */
 .btn-primary {
     background-color: #ff7043;
 }
 
-/* Botón "Editar" (Secundario) */
+.btn-primary:hover {
+    background-color: #e64a19;
+}
+
 .btn-secondary {
-    background-color: #4caf50; /* Verde para diferenciar "Editar" */
+    background-color: #4caf50; /* Verde para acciones de edición */
 }
 
 .btn-secondary:hover {
-    background-color: #388e3c; /* Hover para "Editar" */
+    background-color: #388e3c;
 }
 
-/* Botón "Eliminar" (Peligro) */
 .btn-danger {
-    background-color: #f44336; /* Rojo para indicar acción de peligro */
+    background-color: #f44336; /* Rojo para acciones peligrosas */
 }
 
 .btn-danger:hover {
-    background-color: #c62828; /* Hover para "Eliminar" */
+    background-color: #c62828;
 }
 
-/* Botones dentro de tarjetas */
+/* Card Button Styles */
 .receta-card .btn-primary,
 .receta-card .btn-secondary,
 .receta-card .btn-danger {
     margin: 5px 0;
-    width: 100%; /* Ocupan el ancho completo de la tarjeta */
+    width: 100%; /* Botones del ancho de la tarjeta */
     text-align: center;
 }
 
-/* Secciones */
+/* Section Styles */
 main {
     padding: 20px;
     text-align: center;
@@ -136,6 +136,7 @@ main {
     margin-bottom: 20px;
 }
 
+/* Recipe Card Styles */
 .recetas {
     display: flex;
     justify-content: center;
@@ -164,6 +165,7 @@ main {
     font-size: 1.3rem;
 }
 
+/* Footer Styles */
 footer {
     background-color: #ffad60;
     color: white;
@@ -171,26 +173,11 @@ footer {
     text-align: center;
 }
 
+/* Miscellaneous */
 .header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 10px;
     background-color: #ffad60;
-}
-
-.nav {
-    list-style: none;
-    display: flex;
-    gap: 15px;
-}
-
-.nav li {
-    display: inline;
-}
-
-.usuario-info {
-    font-size: 14px;
-    font-weight: bold;
-    color: #333;
 }
