@@ -36,7 +36,7 @@ if (isset($_GET['id'])) {
     <main>
         <section class="receta-detalle">
             <h2><?php echo htmlspecialchars($receta['titulo']); ?></h2>
-            <img src="assets/uploads/<?php echo $receta['imagen']; ?>" alt="<?php echo htmlspecialchars($receta['titulo']); ?>" class="receta-img">
+            <img src="assets/uploads/<?php echo htmlspecialchars($receta['imagen']); ?>" alt="<?php echo htmlspecialchars($receta['titulo']); ?>" class="receta-img">
             <div class="detalles">
                 <h3>Ingredientes</h3>
                 <p><?php echo nl2br(htmlspecialchars($receta['ingredientes'])); ?></p>
@@ -44,13 +44,13 @@ if (isset($_GET['id'])) {
                 <h3>Modo de Preparación</h3>
                 <p><?php echo nl2br(htmlspecialchars($receta['preparacion'])); ?></p>
                 
-                <?php if (!empty($receta['video'])): ?>
+                <?php if (!empty($receta['video_link'])): ?>
                     <h3>Video de Preparación</h3>
                     <?php
                     // Detecta si es un enlace de YouTube para insertar un iframe
-                    if (strpos($receta['video'], 'youtube.com') !== false || strpos($receta['video'], 'youtu.be') !== false): 
+                    if (strpos($receta['video_link'], 'youtube.com') !== false || strpos($receta['video_link'], 'youtu.be') !== false): 
                         // Convierte el enlace en un enlace embebido
-                        $url_parts = parse_url($receta['video']);
+                        $url_parts = parse_url($receta['video_link']);
                         $video_id = '';
                         if (strpos($url_parts['host'], 'youtube.com') !== false && isset($url_parts['query'])) {
                             parse_str($url_parts['query'], $query_params);
@@ -69,7 +69,7 @@ if (isset($_GET['id'])) {
                     <?php else: ?>
                         <p>
                             Mira el video en el siguiente enlace: 
-                            <a href="<?php echo htmlspecialchars($receta['video']); ?>" target="_blank">
+                            <a href="<?php echo htmlspecialchars($receta['video_link']); ?>" target="_blank">
                                 Ver Video
                             </a>
                         </p>
