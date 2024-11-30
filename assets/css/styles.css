@@ -143,6 +143,11 @@ main {
     padding: 15px;
     text-align: center;
     width: 300px;
+    transition: transform 0.2s; /* Añadir efecto de escala */
+}
+
+.receta-card:hover {
+    transform: scale(1.05); /* Escala al pasar el ratón */
 }
 
 .receta-card img {
