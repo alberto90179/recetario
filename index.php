@@ -46,6 +46,13 @@ $recetasDestacadas = $stmt->fetchAll();
                         <img src="assets/uploads/<?php echo $receta['imagen']; ?>" alt="<?php echo htmlspecialchars($receta['titulo']); ?>">
                         <h3><?php echo htmlspecialchars($receta['titulo']); ?></h3>
                         <a href="receta.php?id=<?php echo $receta['id']; ?>" class="btn-primary">Ver receta</a>
+                        <?php if (!empty($receta['video'])): ?>
+                            <p>
+                                <a href="<?php echo htmlspecialchars($receta['video']); ?>" target="_blank" class="btn-secondary">
+                                    Ver Video en YouTube
+                                </a>
+                            </p>
+                        <?php endif; ?>
                     </article>
                 <?php endforeach; ?>
             </div>
